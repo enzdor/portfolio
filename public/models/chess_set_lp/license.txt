@@ -1,0 +1,11 @@
+Model Information:
+* title:	Chess Set LP
+* source:	https://sketchfab.com/3d-models/chess-set-lp-b5d2b1a6b97046e496bf469feb838354
+* author:	VioletBoom (https://sketchfab.com/violetboom)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Chess Set LP" (https://sketchfab.com/3d-models/chess-set-lp-b5d2b1a6b97046e496bf469feb838354) by VioletBoom (https://sketchfab.com/violetboom) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
