@@ -7,13 +7,12 @@ title: Icon Folder
 */
 
 import React, { useRef } from 'react'
-import { useGLTF, useAnimations } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import { animated } from "@react-spring/three"
 
 export default function Folder({ ...props }) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/models/icon_folder/scene.gltf')
-  const { actions } = useAnimations(animations, group)
+  const { nodes, materials} = useGLTF('/models/icon_folder/scene.gltf')
   return (
     <animated.group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
