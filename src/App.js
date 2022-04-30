@@ -1,12 +1,15 @@
 import './App.css';
 import React, {useState, useRef, Suspense, useEffect} from "react";
 import {Canvas, useLoader, useFrame} from "@react-three/fiber";
-import {OrbitControls, Image, Html, PresentationControls, Bounds, useBounds} from "@react-three/drei";
+import {OrbitControls, Html, Bounds, Text} from "@react-three/drei";
 import Desk from "./Components/Desk";
 import Bookshelf from "./Components/Bookshelf";
 import Chess from "./Components/Chess";
 import File from "./Components/File";
 import Baseball from "./Components/Baseball";
+import Books from "./Components/Books";
+import Folder from "./Components/Folder";
+import Cabinet from "./Components/Cabinet";
 import {useSpring, animated} from "@react-spring/three";
 import {createTheme, ThemeProvider} from "@mui/material/styles"
 import Typography from "@mui/material/Typography";
@@ -14,7 +17,6 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-
 
 
 const theme = createTheme({
@@ -74,8 +76,30 @@ function HtmlDesk(){
 function HtmlBookshelf(){
 	return(
 		<Container sx={{width: "50%", margin: "0", padding: "0"}}>
-			<Typography variant="h1">Books</Typography>
-			<Typography variant="h5">hello</Typography>
+			<Typography variant="h1" sx={{mb: 2}}>Books</Typography>
+			<Typography variant="h5" sx={{width: "100%"}}>One of the things that I really like to do in my free time is to read. Some of my favourite books are The Old Man and the Sea, Crime and Punishment and A Clockwork Orange. You can see all of the books I've read and want to read here:</Typography>
+			<Typography variant="h5" sx={{mt: 2}}><a href="https://www.goodreads.com/user/show/137633524-enzo">goodreads</a></Typography>
+		</Container>	
+	)
+}
+
+function HtmlBaseball(){
+	return(
+		<Container sx={{width: "50%", margin: "0", padding: "0"}}>
+			<Typography variant="h1" sx={{mb: 2}}>Baseball</Typography>
+			<Typography variant="h5" sx={{width: "100%"}}>I really like baseball, I think it is my favourite sport to watch. I have no idea how to swing a bat or throw a curveball but I love it anyway. I'm a Mariners fan, I hope we reach the playoffs! I really like stats, here are some websites that I like:</Typography>
+			<Typography variant="h5" sx={{mt: 2}}><a href="https://www.baseball-reference.com/">baseball-reference</a></Typography>
+			<Typography variant="h5" sx={{mt: 2}}><a href="https://baseballsavant.mlb.com/">baseball savant</a></Typography>
+		</Container>	
+	)	
+}
+
+function HtmlChess(){
+	return(
+		<Container sx={{width: "50%", margin: "0", padding: "0"}}>
+			<Typography variant="h1" sx={{mb: 2}}>Chess</Typography>
+			<Typography variant="h5" sx={{width: "100%"}}>I also really like chess. Most of the time I am solving puzzles but I also like playing games. There is nothing similar to the feeling of losing and winning a game of chess. You can see my lichess profile below:</Typography>
+			<Typography variant="h5" sx={{mt: 2}}><a href="https://lichess.org/@/enzdor">lichess</a></Typography>
 		</Container>	
 	)
 }
@@ -96,9 +120,9 @@ function App() {
 		baseballPosition: baseball ? [-3, 0.75, 0] : [5.65,-0.545,0],
 		baseballScale: baseball ? 1 : desk || bookshelf || chess || file ? 0 : 1,
 		chessPosition: chess ? [-3, 0.4, 0] : [-4.75, -2, 1],
-		chessScale: chess ? 0.1 : desk || bookshelf || baseball || file ? 0 : 0.05,
-		filePosition: file ? [-3, 0.5, 0] : [-3.6, -1, 0],
-		fileScale: file ? 1 : desk || bookshelf || baseball || chess ? 0 : 1,
+		chessScale: chess ? 0.15 : desk || bookshelf || baseball || file ? 0 : 0.05,
+		filePosition: file ? [-3, 0.5, 0] : [-3.6, -1.01, 0],
+		fileScale: file ? 1 : desk || bookshelf || baseball || chess ? 0 : 0.45,
 		htmlPosition: desk || bookshelf || baseball || chess || file ? [0, 0, 0] : [10, 10, 10],
 		wallPosition: desk || bookshelf || baseball || chess || file ? [0,-30,-3] : [0,0,-3],
 		floorPosition: desk || bookshelf || baseball || chess || file ? [0, -2, 33] : [0, -2, -3]
@@ -113,8 +137,28 @@ function App() {
 					<Suspense fallback={null}>
 						<Bounds fit clip observe>
 							{ desk 
-								? <Html position={[0,2.25, -4]} wrapperClass="html-wrapper">
+								? <>
+									<Html position={[0,2.75, -4]} wrapperClass="html-wrapper" >
 										<HtmlDesk /> 
+									</Html>
+								</>
+								: <></>
+							}
+							{ bookshelf 
+								? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+									<HtmlBookshelf /> 
+								</Html>
+								: <></>
+							}
+							{ baseball 
+								? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+										<HtmlBaseball /> 
+									</Html>
+								: <></>
+							}
+							{ chess 
+								? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+										<HtmlChess /> 
 									</Html>
 								: <></>
 							}
@@ -136,7 +180,7 @@ function App() {
 								rotation={[0, -Math.PI /1, 0]}
 								onClick={(e) => (e.stopPropagation(),setChess(!chess))}
 							/>
-							<File 
+							<Cabinet
 								rotation={[0, -Math.PI /2, 0]}
 								position={ springs.filePosition }
 								scale={ springs.fileScale }
