@@ -1,13 +1,12 @@
 import './App.css';
-import React, {useState, useRef, Suspense, useEffect} from "react";
-import {Canvas, useLoader, useFrame} from "@react-three/fiber";
+import React, {useState, useRef, Suspense} from "react";
+import {Canvas, useFrame, useThree} from "@react-three/fiber";
 import {OrbitControls, Html, Bounds, Text} from "@react-three/drei";
 import Desk from "./Components/Desk";
 import Bookshelf from "./Components/Bookshelf";
 import Chess from "./Components/Chess";
 import Baseball from "./Components/Baseball";
 import Books from "./Components/Books";
-import Folder from "./Components/Folder";
 import Folders from "./Components/Folders";
 import Cabinet from "./Components/Cabinet";
 import {useSpring, animated} from "@react-spring/three";
@@ -78,29 +77,57 @@ function HtmlBookshelf(){
 		<Container sx={{width: "50%", margin: "0", padding: "0"}}>
 			<Typography variant="h1" sx={{mb: 2}}>Books</Typography>
 			<Typography variant="h5" sx={{width: "100%"}}>One of the things that I really like to do in my free time is to read. Some of my favourite books are The Old Man and the Sea, Crime and Punishment and A Clockwork Orange. You can see all of the books I've read and want to read here:</Typography>
-			<Typography variant="h5" sx={{mt: 2}}><a href="https://www.goodreads.com/user/show/137633524-enzo" target="_blank">goodreads</a></Typography>
+			<Typography variant="h5" sx={{mt: 2}} className="underline"><a className="link" href="https://www.goodreads.com/user/show/137633524-enzo" target="_blank">goodreads</a></Typography>
+		</Container>	
+	)
+}
+function HtmlBaseball(){ 
+	return( 
+		<Container sx={{width: "50%", margin: "0", padding: "0"}}> 
+			<Typography variant="h1" sx={{mb: 2}}>Baseball</Typography> 
+			<Typography variant="h5" sx={{width: "100%"}}>I really like baseball, I think it is my favourite sport to watch. I have no idea how to swing a bat or throw a curveball but I love it anyway. I'm a Mariners fan, I hope we reach the playoffs! I really like stats, here are some websites that I like:</Typography> 
+			<Stack direction="row" spacing={3} sx={{mt: 2}}>
+				<Typography variant="h5" className="underline"><a href="https://www.baseball-reference.com/" className="link" target="_blank">baseball-reference</a></Typography> 
+				<Typography variant="h5" className="underline"><a href="https://baseballsavant.mlb.com/" className="link" target="_blank">baseball savant</a></Typography> 
+			</Stack>
 		</Container>	
 	)
 }
 
-function HtmlBaseball(){
-	return(
-		<Container sx={{width: "50%", margin: "0", padding: "0"}}>
-			<Typography variant="h1" sx={{mb: 2}}>Baseball</Typography>
-			<Typography variant="h5" sx={{width: "100%"}}>I really like baseball, I think it is my favourite sport to watch. I have no idea how to swing a bat or throw a curveball but I love it anyway. I'm a Mariners fan, I hope we reach the playoffs! I really like stats, here are some websites that I like:</Typography>
-			<Typography variant="h5" sx={{mt: 2}}><a href="https://www.baseball-reference.com/" target="_blank">baseball-reference</a></Typography>
-			<Typography variant="h5" sx={{mt: 2}}><a href="https://baseballsavant.mlb.com/" target="_blank">baseball savant</a></Typography>
-		</Container>	
-	)	
+function HtmlChess(){ 
+	return( 
+		<Container sx={{width: "50%", margin: "0", padding: "0"}}> 
+			<Typography variant="h1" sx={{mb: 2}}>Chess</Typography> 
+			<Typography variant="h5" sx={{width: "100%"}}>I also really like chess. Most of the time I am solving puzzles but I also like playing games. There is nothing similar to the feeling of losing and winning a game of chess. You can see my lichess profile below:</Typography>
+			<Typography variant="h5" className="underline" sx={{mt: 2}}><a href="https://lichess.org/@/enzdor" className="link" target="_blank">lichess</a></Typography>
+		</Container>
+	)
 }
 
-function HtmlChess(){
+function HtmlBooks(){
 	return(
-		<Container sx={{width: "50%", margin: "0", padding: "0"}}>
-			<Typography variant="h1" sx={{mb: 2}}>Chess</Typography>
-			<Typography variant="h5" sx={{width: "100%"}}>I also really like chess. Most of the time I am solving puzzles but I also like playing games. There is nothing similar to the feeling of losing and winning a game of chess. You can see my lichess profile below:</Typography>
-			<Typography variant="h5" sx={{mt: 2}}><a href="https://lichess.org/@/enzdor" target="_blank">lichess</a></Typography>
-		</Container>	
+		<ThemeProvider theme={theme}>
+			<Container sx={{width: "50%", margin: "0", padding: "0"}}>
+				<Typography variant="h1" sx={{mb: 2}}>Alejandría</Typography>
+				<Typography variant="h5" sx={{width: "100%"}}>Alejandría is an ecommerce for selling and buying books. I created this project to gain a deeper understanding of React in general. I also wanted to implement popular libraries like Stripe, Auth0 and MUI. This was a great experience and very fun project to work on. You can visit the website and see the code below:</Typography>
+				<Stack direction="row" spacing={3} sx={{mt: 2}}>
+					<Typography variant="h5" className="underline"><a href="https://alejandria-website.vercel.app/" className="link" target="_blank">website</a></Typography>
+					<Typography variant="h5" className="underline"><a href="https://github.com/enzdor/alejandria-website" className="link" target="_blank">github</a></Typography>
+				</Stack>
+			</Container>
+		</ThemeProvider>
+	)
+}
+
+function HtmlFolder(){
+	return(
+		<ThemeProvider theme={theme}>
+			<Container sx={{width: "50%", margin: "0", padding: "0"}}>
+				<Typography variant="h1" sx={{mb: 2}}>Portfolio</Typography>
+				<Typography variant="h5" sx={{width: "100%"}}>This website was the follow up to Alejandría. I had discovered three.js and react-three-fiber and wanted to learn how to use it. This was great experience and learned a lot from it. You can visit the source code below:</Typography>
+				<Typography variant="h5" className="underline" sx={{mt: 2}}><a href="https://github.com/enzdor/portfolio" className="link" target="_blank">github</a></Typography>
+			</Container>
+		</ThemeProvider>
 	)
 }
 
@@ -177,13 +204,13 @@ function App() {
 							}
 							{ books 
 								? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
-										<HtmlChess /> 
+										<HtmlBooks /> 
 								</Html>
 								: <></>
 							}
 							{ folder 
 								? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
-										<HtmlChess /> 
+										<HtmlFolder /> 
 								</Html>
 								: <></>
 							}
