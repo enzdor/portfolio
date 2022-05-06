@@ -43,11 +43,11 @@ function Scene(){
 		bookshelfPosition: bookshelf ? [-3.5,-1,0] : [3.85,-1.41,0],
 		bookshelfScale: bookshelf ? 0.0027 : desk || baseball || chess || cabinet || books || folder || vertical ? 0 : 0.0037,
 		baseballPosition: baseball ? [-3.5, 0.5, 0] : [5.35,-0.545,0],
-		baseballScale: baseball ? 1.5 : desk || bookshelf || chess || cabinet || books || folder || vertical ? 0 : 1,
+		baseballScale: baseball ? 1.2 : desk || bookshelf || chess || cabinet || books || folder || vertical ? 0 : 1,
 		chessPosition: chess ? [-3.5, -0.1, 0] : [-5.05, -2, 1],
 		chessScale: chess ? 0.15 : desk || bookshelf || baseball || cabinet || books || folder || vertical ? 0 : 0.05,
-		cabinetPosition: cabinet ? [-4.5, -0.2, 0] : [-3.9, -1.01, 0],
-		cabinetScale: cabinet ? 0.45 : desk || bookshelf || baseball || chess || books || folder || vertical ? 0 : 0.45,
+		cabinetPosition: [-3.9, -1.01, 0],
+		cabinetScale:  desk || bookshelf || baseball || chess || books || folder || vertical || cabinet? 0 : 0.45,
 		htmlPosition: desk || bookshelf || baseball || chess || cabinet || books || folder || vertical ? [0, 0, 0] : [10, 10, 10],
 		wallPosition: desk || bookshelf || baseball || chess || cabinet || books || folder || vertical ? [0,-30,-3] : [0,0,-3],
 		floorPosition: desk || bookshelf || baseball || chess || cabinet || books || folder || vertical ? [0, -2, 33] : [0, -2, -3],
@@ -90,44 +90,77 @@ function Scene(){
 							<Html position={[0,2.75, -4]} wrapperClass="html-wrapper" >
 								<HtmlDesk /> 
 							</Html>
+							<Html position={[-3.625, -2, 0]} wrapperClass="html-wrapper" center >
+								<Typography variant="h3" sx={{cursor: 'pointer'}} onClick={() => setDesk(!desk)}>&larr;</Typography>
+							</Html>
 						</>
 						: <></>
 					}
 					{ bookshelf 
-						? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
-							<HtmlBookshelf /> 
-						</Html>
+						? <>
+							<Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+								<HtmlBookshelf /> 
+							</Html>
+							<Html position={[-3.625, -2, 0]} wrapperClass="html-wrapper" center >
+								<Typography variant="h3" sx={{cursor: 'pointer'}} onClick={() => setBookshelf(!bookshelf)}>&larr;</Typography>
+							</Html>
+						</>
 						: <></>
 					}
 					{ baseball 
-						? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+						? <> 
+							<Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
 								<HtmlBaseball /> 
-						</Html>
+							</Html>
+							<Html position={[-3.625, -2, 0]} wrapperClass="html-wrapper" center >
+								<Typography variant="h3" sx={{cursor: 'pointer'}} onClick={() => setBaseball(!baseball)}>&larr;</Typography>
+							</Html>
+						</>
 						: <></>
 					}
 					{ chess 
-						? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+						? <> 
+							<Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
 								<HtmlChess /> 
-						</Html>
+							</Html>
+							<Html position={[-3.625, -2, 0]} wrapperClass="html-wrapper" center >
+								<Typography variant="h3" sx={{cursor: 'pointer'}} onClick={() => setChess(!chess)}>&larr;</Typography>
+							</Html>
+						 </>
 						: <></>
 					}
 					{ cabinet
-						? <Html position={[0, 2, 0]} center>
-							<Typography variant="h1" sx={{fontSize: {xs: '2rem', lg: '6rem'}}}>Projects</Typography>
-						</Html>
+						? <> 
+							<Html position={[0, 2, 0]} center>
+								<Typography variant="h1" sx={{fontSize: {xs: '2rem', lg: '6rem'}}}>Projects</Typography>
+							</Html>
+							 <Html position={[-4, -0.2, 0]}  center >
+								<Typography variant="h1" sx={{cursor: 'pointer'}} onClick={() => setCabinet(!cabinet)}>&larr;</Typography>
+							 </Html>
+						</>
 						: <></>
 
 					}
 					{ books 
-						? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+						? <>
+							<Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
 								<HtmlBooks /> 
-						</Html>
+							</Html>
+							 <Html position={[-3.625, -2, 0]} wrapperClass="html-wrapper" center >
+								<Typography variant="h3" sx={{cursor: 'pointer'}} onClick={() =>(setBooks(!books), setCabinet(!cabinet))}>&larr;</Typography>
+							 </Html>
+						</>
 						: <></>
 					}
 					{ folder 
-						? <Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
+						? <>
+							<Html position={[0,2.75, -4]} wrapperClass="html-wrapper">
 								<HtmlFolder /> 
-						</Html>
+							</Html>
+							 <Html position={[-3.625, -2, 0]} wrapperClass="html-wrapper" center >
+								<Typography variant="h3" sx={{cursor: 'pointer'}} onClick={() => (setFolder(!folder), setCabinet(!cabinet))}>&larr;</Typography>
+							 </Html>
+						</>
 						: <></>
 					}
 					{ vertical

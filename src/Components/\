@@ -1,0 +1,23 @@
+import {useState} from "react";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import {useSpring, animated} from "react-spring"
+
+export default function Help(){
+	const [help, setHelp] = useState(true)
+
+
+	return(
+		<animated.div className="help-container" style={springs}>
+			<Typography variant="h4" color="white" sx={{cursor: 'pointer'}} onClick={() => {setHelp(!help)}}>Help</Typography>
+			{ help
+				? <Container>
+					<Typography variant="h6" color="white">
+						For you to explore the different sections of this website you need to click in the different objects (bookshelf, desk, cabinet). Once you are inside a section, for you to go back you need to click the object you clicked to get where you are.
+					</Typography>
+				</Container>
+				: <></>
+			}
+		</animated.div>
+	)
+}
