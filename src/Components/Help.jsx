@@ -22,10 +22,10 @@ export default function Help(){
 				<Container sx={{height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
 					<Container>
 						<Typography variant="h3" color="white">
-							Welcome to my website!
+							Welcome to my fun website!
 						</Typography>
 						<Typography variant="h6" color="white">
-							For you to explore the different sections of the website, just click the different objects (bookshelf, desk, cabinet, etc.). If you don't know where to go, just click an object!	
+							For you to explore the different sections of the website, just click the different objects (bookshelf, desk, cabinet, etc.). If you don't know where to go, just click an object! Remember, this is not polished and was created as a way to display the uses of react-three-fiber. Its main focus is not accessibility, its fun!
 						</Typography>
 					</Container>
 				</Container>
